@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hair Studio | Book Online</title>
+  <meta name="description" content="Haircuts, colour and styling. See services and prices, read reviews and book your appointment online.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand" data-bind="name">Hair Studio</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="nav-links" class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+        <a href="#book" class="btn btn-small">Book now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <p class="eyebrow" data-bind="stylistLine"></p>
+        <h1 data-bind="name">Hair Studio</h1>
+        <p class="lead" data-bind="tagline"></p>
+        <div class="hero-actions">
+          <a href="#book" class="btn">Book an appointment</a>
+          <a href="#services" class="btn btn-ghost">See prices</a>
+        </div>
+        <p class="hero-rating" id="hero-rating" hidden></p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Menu</p>
+          <h2>Services &amp; prices</h2>
+        </div>
+        <div class="services" id="services-list"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section section-alt">
+      <div class="container about">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2 data-bind="aboutTitle">Meet your stylist</h2>
+          <p data-bind="about"></p>
+        </div>
+        <ul class="about-points">
+          <li><strong>One-to-one</strong><span>You get my full attention from consultation to finish.</span></li>
+          <li><strong>Honest advice</strong><span>I'll tell you what will work for your hair and your routine.</span></li>
+          <li><strong>Easy booking</strong><span>Pick a time online in under a minute.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="book" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Appointments</p>
+          <h2>Book online</h2>
+          <p class="muted">Choose a service, pick a day and time, and you're done. You'll get a reference number straight away.</p>
+        </div>
+
+        <form id="booking-form" class="card booking" novalidate>
+          <div class="step">
+            <h3><span class="step-num">1</span> Service</h3>
+            <label class="field">
+              <span>Service</span>
+              <select name="service" id="b-service" required>
+                <option value="">Choose a service…</option>
+              </select>
+              <small class="err" data-err="service"></small>
+            </label>
+          </div>
+
+          <div class="step">
+            <h3><span class="step-num">2</span> Day &amp; time</h3>
+            <label class="field">
+              <span>Date</span>
+              <input type="date" name="date" id="b-date" required>
+              <small class="err" data-err="date"></small>
+            </label>
+            <div class="field">
+              <span id="slots-label">Available times</span>
+              <div id="slots" class="slots" role="radiogroup" aria-labelledby="slots-label">
+                <p class="muted">Choose a service and date to see free times.</p>
+              </div>
+              <small class="err" data-err="time"></small>
+            </div>
+          </div>
+
+          <div class="step">
+            <h3><span class="step-num">3</span> Your details</h3>
+            <div class="grid-2">
+              <label class="field">
+                <span>Full name</span>
+                <input name="name" autocomplete="name" maxlength="80" required>
+                <small class="err" data-err="name"></small>
+              </label>
+              <label class="field">
+                <span>Phone</span>
+                <input name="phone" type="tel" autocomplete="tel" maxlength="30" required>
+                <small class="err" data-err="phone"></small>
+              </label>
+            </div>
+            <label class="field">
+              <span>Email <em class="muted">(optional)</em></span>
+              <input name="email" type="email" autocomplete="email" maxlength="120">
+              <small class="err" data-err="email"></small>
+            </label>
+            <label class="field">
+              <span>Notes <em class="muted">(optional: hair length, colour history, anything I should know)</em></span>
+              <textarea name="notes" rows="3" maxlength="500"></textarea>
+            </label>
+            <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="summary" id="booking-summary" hidden></div>
+          <p class="form-error" id="booking-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-block" id="booking-submit">Request booking</button>
+        </form>
+
+        <div id="booking-done" class="card done" hidden tabindex="-1">
+          <div class="check" aria-hidden="true">✓</div>
+          <h3>You're booked in</h3>
+          <p id="booking-done-text"></p>
+          <p class="ref">Reference <strong id="booking-ref"></strong></p>
+          <p class="muted">Keep this reference. To change or cancel, call or email with it at least 24 hours ahead.</p>
+          <button type="button" class="btn btn-ghost" id="booking-again">Make another booking</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Reviews</p>
+          <h2>What clients say</h2>
+          <p class="muted" id="reviews-summary"></p>
+        </div>
+        <div class="reviews" id="reviews-list"></div>
+
+        <details class="card review-form-wrap" id="review-details">
+          <summary>Leave a review</summary>
+          <form id="review-form" novalidate>
+            <div class="field">
+              <span id="rating-label">Your rating</span>
+              <div class="stars-input" role="radiogroup" aria-labelledby="rating-label">
+                <input type="radio" name="rating" id="r5" value="5"><label for="r5" title="5 stars">★</label>
+                <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>
+                <input type="radio" name="rating" id="r3" value="3"><label for="r3" title="3 stars">★</label>
+                <input type="radio" name="rating" id="r2" value="2"><label for="r2" title="2 stars">★</label>
+                <input type="radio" name="rating" id="r1" value="1"><label for="r1" title="1 star">★</label>
+              </div>
+              <small class="err" data-err="rating"></small>
+            </div>
+            <label class="field">
+              <span>Name</span>
+              <input name="name" maxlength="60" autocomplete="name" required>
+              <small class="err" data-err="name"></small>
+            </label>
+            <label class="field">
+              <span>Your review</span>
+              <textarea name="text" rows="4" maxlength="1000" required></textarea>
+              <small class="err" data-err="text"></small>
+            </label>
+            <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+            <p class="form-error" id="review-error" role="alert" hidden></p>
+            <button class="btn" type="submit">Submit review</button>
+          </form>
+          <p id="review-done" class="success" hidden>Thanks! Your review will appear once it's been checked.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="visit" class="section">
+      <div class="container visit">
+        <div>
+          <p class="eyebrow">Visit</p>
+          <h2>Hours &amp; location</h2>
+          <table class="hours" id="hours-table"></table>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact">
+            <li><span>Address</span><span data-bind="address"></span></li>
+            <li><span>Phone</span><a data-bind="phone" id="contact-phone"></a></li>
+            <li><span>Email</span><a data-bind="email" id="contact-email"></a></li>
+            <li id="contact-ig-row" hidden><span>Instagram</span><a id="contact-ig" target="_blank" rel="noopener">Follow</a></li>
+          </ul>
+          <h3>Good to know</h3>
+          <ul class="policies" id="policies"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> <span data-bind="name">Hair Studio</span></span>
+      <a href="/admin">Staff login</a>
+    </div>
+  </footer>
+
+  <script src="/common.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

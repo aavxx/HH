@@ -1,0 +1,14 @@
+{
+  "name": "hair-studio-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hair stylist website with online booking, reviews and an admin booking portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

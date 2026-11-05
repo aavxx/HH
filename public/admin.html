@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Booking Portal</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin">
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/" class="brand"><span id="brand-name">Studio</span> <small class="muted">Booking portal</small></a>
+      <button class="btn btn-ghost btn-small" id="logout" hidden>Log out</button>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+    <section id="login-view" hidden>
+      <form id="login-form" class="card login">
+        <h1>Staff login</h1>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" required autofocus>
+        </label>
+        <p class="form-error" id="login-error" role="alert" hidden></p>
+        <button class="btn btn-block" type="submit">Log in</button>
+      </form>
+    </section>
+
+    <section id="app-view" hidden>
+      <div class="stats" id="stats"></div>
+
+      <div class="tabs" role="tablist">
+        <button role="tab" class="tab" aria-selected="true" data-tab="bookings" id="tab-bookings">Bookings</button>
+        <button role="tab" class="tab" aria-selected="false" data-tab="reviews" id="tab-reviews">Reviews <span class="badge" id="pending-reviews" hidden></span></button>
+      </div>
+
+      <div id="panel-bookings" role="tabpanel" aria-labelledby="tab-bookings">
+        <div class="toolbar">
+          <div class="filters" id="filters">
+            <button class="chip" data-filter="today">Today</button>
+            <button class="chip" data-filter="upcoming" aria-pressed="true">Upcoming</button>
+            <button class="chip" data-filter="pending">Needs confirming</button>
+            <button class="chip" data-filter="past">Past</button>
+            <button class="chip" data-filter="cancelled">Cancelled</button>
+            <button class="chip" data-filter="all">All</button>
+          </div>
+          <div class="toolbar-right">
+            <input type="date" id="date-filter" aria-label="Show a specific date">
+            <input type="search" id="search" placeholder="Search name, phone, ref…" aria-label="Search bookings">
+            <button class="btn btn-ghost btn-small" id="refresh" title="Refresh">Refresh</button>
+          </div>
+        </div>
+        <p class="form-error" id="admin-error" role="alert" hidden></p>
+        <div id="bookings-list"></div>
+      </div>
+
+      <div id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" hidden>
+        <div id="reviews-admin"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/common.js"></script>
+  <script src="/admin.js"></script>
+</body>
+</html>
